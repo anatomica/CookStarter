@@ -12,11 +12,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
     @Bean
-    public Docket api() {
+    public Docket controllers() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("ru.anatomica.cookstarter.controllers"))
                 .paths(PathSelectors.regex("/api.*"))
+                .build();
+    }
+
+    @Bean
+    public Docket auth() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("ru.anatomica.cookstarter.controllers"))
                 .paths(PathSelectors.regex("/auth"))
                 .build();
     }
