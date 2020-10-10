@@ -1,1 +1,1 @@
-web: java -jar target/Spring_Market-0.0.1-SNAPSHOT.war -Dserver.port=$PORT
+web: java -jar target/CookStarter-1.0-SNAPSHOT.war -Dserver.port=$PORT
