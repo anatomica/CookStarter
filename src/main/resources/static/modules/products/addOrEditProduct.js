@@ -1,6 +1,6 @@
 angular.module('addOrEditProduct', [])
     .controller('addOrEditProductCtrl', function ($scope, $http, $routeParams) {
-        const advertsPath = contextPath + '/api/v2/products';
+        const advertsPath = contextPath + '/api/v1/products';
 
         if ($routeParams.id != null) {
             $http.get(advertsPath + '/' + $routeParams.id)
@@ -19,14 +19,14 @@ angular.module('addOrEditProduct', [])
             // window.btoa("admin@gmail.com:100")
 
             if($scope.productFromForm.id == null) {
-                $http.post(contextPath + '/api/v2/products', $scope.productFromForm)
+                $http.post(contextPath + '/api/v1/products', $scope.productFromForm)
                     .then(function (response) {
                     console.log(response);
                     window.location.href = '/products';
                     window.location.reload(true);
                 });
             } else {
-                $http.put(contextPath + '/api/v2/products', $scope.productFromForm)
+                $http.put(contextPath + '/api/v1/products', $scope.productFromForm)
                     .then(function (response) {
                     console.log(response);
                     window.location.href = '/products';
