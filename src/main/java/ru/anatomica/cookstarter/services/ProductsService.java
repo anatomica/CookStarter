@@ -1,6 +1,7 @@
 package ru.anatomica.cookstarter.services;
 
 import ru.anatomica.cookstarter.entities.Product;
+import ru.anatomica.cookstarter.entities.Restaurant;
 import ru.anatomica.cookstarter.entities.dtos.ProductDto;
 import ru.anatomica.cookstarter.repositories.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ru.anatomica.cookstarter.repositories.RestaurantsRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +17,16 @@ import java.util.Optional;
 @Service
 public class ProductsService {
     private ProductsRepository productsRepository;
+    private RestaurantsRepository restaurantsRepository;
 
     @Autowired
     public void setProductsRepository(ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;
+    }
+
+    @Autowired
+    public void setRestaurantsRepository(RestaurantsRepository restaurantsRepository) {
+        this.restaurantsRepository = restaurantsRepository;
     }
 
     public Product saveOrUpdate(Product product) {
@@ -38,6 +46,10 @@ public class ProductsService {
             page = 1;
         }
         return productsRepository.findAll(spec, PageRequest.of(page - 1, 10));
+    }
+
+    public List<Restaurant> findAllRestaurants() {
+        return restaurantsRepository.findAll();
     }
 
     public void deleteAll() {
