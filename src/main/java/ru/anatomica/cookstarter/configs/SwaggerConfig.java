@@ -14,6 +14,7 @@ public class SwaggerConfig {
     @Bean
     public Docket controllers() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("controllers")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("ru.anatomica.cookstarter.controllers"))
                 .paths(PathSelectors.regex("/api.*"))
@@ -23,6 +24,7 @@ public class SwaggerConfig {
     @Bean
     public Docket auth() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("auth")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("ru.anatomica.cookstarter.controllers"))
                 .paths(PathSelectors.regex("/auth"))
