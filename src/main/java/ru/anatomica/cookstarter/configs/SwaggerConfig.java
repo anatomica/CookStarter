@@ -17,6 +17,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("ru.anatomica.cookstarter.controllers"))
                 .paths(PathSelectors.regex("/api.*"))
+                .paths(PathSelectors.regex("/auth"))
                 .build();
     }
 }
