@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Objects;
 
 @Entity
 @Proxy(lazy = false)
@@ -31,10 +28,14 @@ public class Restaurant {
     @Column(name = "address")
     private String address;
 
-    public Restaurant(String name, String description, String address) {
+    @Column(name = "telephone")
+    private String telephone;
+
+    public Restaurant(String name, String description, String address, String telephone) {
         this.name = name;
         this.description = description;
         this.address = address;
+        this.telephone = telephone;
     }
 
 }
