@@ -1,5 +1,7 @@
 package ru.anatomica.cookstarter.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ru.anatomica.cookstarter.beans.JwtTokenUtil;
 import ru.anatomica.cookstarter.entities.dtos.JwtRequest;
 import ru.anatomica.cookstarter.entities.dtos.JwtResponse;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api("Set of endpoints for CRUD operations for Users")
 public class AuthController {
     private final UsersService usersService;
     private final JwtTokenUtil jwtTokenUtil;
@@ -30,6 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth")
+    @ApiOperation("Operation with Users")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));

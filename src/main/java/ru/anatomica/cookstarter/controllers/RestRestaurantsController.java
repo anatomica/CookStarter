@@ -37,7 +37,7 @@ public class RestRestaurantsController {
     }
 
     @GetMapping(produces = "application/json")
-    @ApiOperation("Returns list or page of all restaurants")
+    @ApiOperation("Returns list of all Restaurants")
     public List<Restaurant> getPageProducts(@RequestParam(required = false) Map<String, String> requestParams){
         Integer pageNumber = Integer.parseInt(requestParams.getOrDefault("p", "1"));
         // ProductFilter productFilter = new ProductFilter(requestParams);
@@ -46,7 +46,7 @@ public class RestRestaurantsController {
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    @ApiOperation("Returns one product by id")
+    @ApiOperation("Returns one Restaurant by id")
     public ResponseEntity<?> getOneProduct(@PathVariable @ApiParam("Id of the product to be requested. Cannot be empty") Long id) {
         if (!productsService.existsById(id)) {
             throw new ProductNotFoundException("Product not found, id: " + id);
@@ -55,20 +55,20 @@ public class RestRestaurantsController {
     }
 
     @DeleteMapping
-    @ApiOperation("Removes all products")
+    @ApiOperation("Removes all Restaurants")
     public void deleteAllProducts() {
         productsService.deleteAll();
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation("Removes one product by id")
+    @ApiOperation("Removes one Restaurant by id")
     public void deleteOneProducts(@PathVariable Long id) {
         productsService.deleteById(id);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation("Creates a new product")
+    @ApiOperation("Creates a new Restaurant")
     public Product saveNewProduct(@RequestBody Product product) {
         if (product.getId() != null) {
             product.setId(null);
@@ -77,7 +77,7 @@ public class RestRestaurantsController {
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
-    @ApiOperation("Modifies an existing product")
+    @ApiOperation("Modifies an existing Restaurant")
     public ResponseEntity<?> modifyProduct(@RequestBody Product product) {
         if (product.getId() == null || !productsService.existsById(product.getId())) {
             throw new ProductNotFoundException("Product not found, id: " + product.getId());
