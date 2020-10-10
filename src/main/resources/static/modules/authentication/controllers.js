@@ -4,7 +4,7 @@ angular.module('Authentication')
     .controller('LoginController', function ($scope, $rootScope, $location, $http, $localStorage) {
         $scope.tryToAuth = function () {
             $scope.dataLoading = true;
-            $http.post(contextPath + '/auth', $scope.user)
+            $http.post(contextPath + '/api/v1/auth', $scope.user)
                 .then(successCallback, errorCallback);
             function successCallback(response){
                 if (response.data.token) {

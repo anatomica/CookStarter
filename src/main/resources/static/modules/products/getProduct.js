@@ -1,6 +1,6 @@
 angular.module('Products', [])
     .controller('ProductsController', function($scope, $http, $location, $routeParams) {
-        const advertsPath = contextPath + '/api/v1/products';
+        const advertsPath = contextPath + '/api/v2/products';
 
         if ($routeParams.p != null) {
             fillTable = function() {
