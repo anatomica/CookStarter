@@ -48,10 +48,10 @@ public class RestRestaurantsController {
     @GetMapping(value = "/{id}", produces = "application/json")
     @ApiOperation("Returns one Restaurant by id")
     public ResponseEntity<?> getOneProduct(@PathVariable @ApiParam("Id of the product to be requested. Cannot be empty") Long id) {
-        if (!productsService.existsById(id)) {
-            throw new ProductNotFoundException("Product not found, id: " + id);
-        }
-        return new ResponseEntity<>(productsService.findById(id), HttpStatus.OK);
+//        if (!productsService.existsById(id)) {
+//            throw new ProductNotFoundException("Product not found, id: " + id);
+//        }
+        return new ResponseEntity<>(productsService.findAllProducts(), HttpStatus.OK);
     }
 
     @DeleteMapping

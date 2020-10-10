@@ -1,8 +1,10 @@
 package ru.anatomica.cookstarter.services;
 
 import ru.anatomica.cookstarter.entities.Product;
+import ru.anatomica.cookstarter.entities.ProductMenu;
 import ru.anatomica.cookstarter.entities.Restaurant;
 import ru.anatomica.cookstarter.entities.dtos.ProductDto;
+import ru.anatomica.cookstarter.repositories.ProductsMenuRepository;
 import ru.anatomica.cookstarter.repositories.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import java.util.Optional;
 public class ProductsService {
     private ProductsRepository productsRepository;
     private RestaurantsRepository restaurantsRepository;
+    private ProductsMenuRepository productsMenuRepository;
 
     @Autowired
     public void setProductsRepository(ProductsRepository productsRepository) {
@@ -27,6 +30,11 @@ public class ProductsService {
     @Autowired
     public void setRestaurantsRepository(RestaurantsRepository restaurantsRepository) {
         this.restaurantsRepository = restaurantsRepository;
+    }
+
+    @Autowired
+    public ProductsService(ProductsMenuRepository productsMenuRepository) {
+        this.productsMenuRepository = productsMenuRepository;
     }
 
     public Product saveOrUpdate(Product product) {
@@ -50,6 +58,10 @@ public class ProductsService {
 
     public List<Restaurant> findAllRestaurants() {
         return restaurantsRepository.findAll();
+    }
+
+    public List<ProductMenu> findAllProducts() {
+        return productsMenuRepository.findAll();
     }
 
     public void deleteAll() {
