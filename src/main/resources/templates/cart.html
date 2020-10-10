@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Главная</title>
+    <div th:replace="~{head}"></div>
+    <script type="text/javascript"></script>
+    <script th:src="@{/scripts/app.js}"></script>
+    <script th:src="@{/modules/authentication/services.js}"></script>
+    <script th:src="@{/modules/authentication/controllers.js}"></script>
+    <script th:src="@{/modules/cart/CartController.js}"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{header :: navigation(Cart)}" />
+
+    <hr>
+    <div class="content">
+        <h2>Корзина</h2>
+
+        <span th:unless="${@cartService.items.size() > 0}">Ваша корзина пуста</span>
+
+        <table class="table table-hover" th:if="${@cartService.items.size() > 0}" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>ID</td>
+                <td>Название</td>
+                <td>Количество</td>
+                <td>Цена</td>
+                <td>Операции</td>
+            </tr>
+            <tbody ng-repeat="productCart in CartList">
+            <tr>
+                <td>{{productCart.id}}</td>
+                <td>{{productCart.productTitle}}</td>
+                <td>
+                    <a class="btn btn-primary" ng-click="decrementProduct(productCart)">-</a>
+                    {{productCart.quantity}}
+                    <a class="btn btn-primary" ng-click="incrementProduct(productCart)">+</a>
+                </td>
+                <td>{{productCart.price}}</td>
+                <td><a class="btn btn-danger" ng-click="removeProduct(productCart)">Удалить</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" ng-click="createOrder()" th:if="${@cartService.items.size() > 0}">Оформить заказ</button>
+    </div>
+</div>
+
+<hr>
+<div th:replace="~{footer}"></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Редактировать  </title>
+    <div th:replace="~{head}"></div>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{header :: navigation(AddProduct)}" />
+
+    <hr>
+    <div class="content">
+        <h1 class="storeName">Изменить данные:</h1>
+        <br>
+        <div class="textOnCenter">
+            <form th:action="@{/products/edit}" th:object="${product}" method="POST">
+                <input hidden th:field="*{id}"/>
+                <br>
+                Название: <input th:field="*{title}"/>
+                <br>
+                <br>
+                Цена: <input th:field="*{price}"/>
+                <br>
+                <br>
+                Категория: <input th:field="*{category.id_category}"/>
+                <br>
+                <br>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div th:replace="~{footer}"></div>
+</body>
+</html>

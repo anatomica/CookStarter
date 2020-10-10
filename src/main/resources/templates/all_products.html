@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Каталог</title>
+    <div th:replace="~{head}"></div>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{header :: navigation(Market)}" />
+
+    <hr>
+    <div class="content">
+        <br>
+        <h1 class="storeName">Список товаров:</h1>
+        <br>
+        <div class="textOnCenter">
+            <table class="table table-hover" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>ID Товара</td>
+                    <td>Название</td>
+                    <td>Цена</td>
+                    <td>Операции</td>
+                </tr>
+                <tbody ng-repeat="p in AllProducts">
+                <tr>
+                    <td>{{p.id}}</td>
+                    <td>{{p.title}}</td>
+                    <td>{{p.price}}</td>
+                    <td>
+                        <a th:href="@{#!/products/add_or_edit_product?id={{p.id}}}" th:text="Редактировать" class="btn btn-success textInLongView"></a>
+                        <button class="btn btn-primary to-cart-btn" ng-click="addToCartFunction(p)">Добавить в корзину</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link"
+                           th:href="@{'/#!/products?p='+ ${products.previousOrFirstPageable().getPageNumber() + 1} + ${filterDef}}"
+                           th:if="${!products.first}">Назад</a>
+                    </li>
+
+                    <li class="page-item" th:classappend="${products.getNumber() + 1 == i ? 'active' : ''}"
+                        th:each="i : ${#numbers.sequence(1, products.getTotalPages())}">
+                        <a class="page-link" th:text="${i}" th:href="@{'/#!/products?p=' + ${i} + ${filterDef}}"></a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link"
+                           th:href="@{'/#!/products?p='+ ${products.nextOrLastPageable().getPageNumber() + 1} + ${filterDef}}"
+                           th:if="${!products.last}">Вперед</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <form class="textCenter" name="form" ng-submit="filterTable()">
+            <h2 class="storeName">Отфильтровать:</h2>
+            <div class="form-group">
+                <label>Минимальная цена</label>
+                <input type="number" class="form-control" name="min_price" ng-model="min_price">
+            </div>
+            <div class="form-group">
+                <label>Максимальная цена</label>
+                <input type="number" class="form-control" name="max_price" ng-model="max_price">
+            </div>
+            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Применить</button>
+            <a th:href="@{'/#!/products'}" type="button" class="btn btn-warning">Сброс фильтра</a>
+        </form>
+        <br>
+
+        <form class="textCenter" th:action="@{'/products'}" method="GET">
+            <h2 class="storeName">Найти товар по названию:</h2>
+            <div class="form-group">
+                <label>Название содержит:</label>
+                <input type="text" th:value="${param.like != null ? param.like : ''}" class="form-control" name="like">
+            </div>
+            <button type="submit" class="btn btn-primary">Применить</button>
+            <a th:href="@{/#/products}" type="button" class="btn btn-warning">Сброс фильтра</a>
+        </form>
+        <br>
+
+        <form class="textCenter" th:action="@{'/products'}" method="GET">
+            <h2 class="storeName">Найти товар по категории:</h2>
+            <div class="form-group">
+                <label>Название содержит:</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Выбор</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{/#/products?category=1}">Категория 1</a>
+                            <a class="dropdown-item" th:href="@{/#/products?category=2}">Категория 2</a>
+                            <a class="dropdown-item" th:href="@{/#/products?category=3}">Категория 3</a>
+                        </div>
+                    </div>
+                    <input type="text" th:value="${param.category != null ? ('Категория ' + param.category) : ''}" class="form-control" aria-label="Text input with dropdown button">
+                </div>
+            </div>
+            <a th:href="@{/#/products}" type="button" class="btn btn-warning">Сброс фильтра</a>
+        </form>
+        <br>
+
+    </div>
+</div>
+
+<hr>
+<div th:replace="~{footer}"></div>
+</body>
+
+</html>
