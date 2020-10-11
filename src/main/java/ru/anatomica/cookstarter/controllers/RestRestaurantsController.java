@@ -51,7 +51,7 @@ public class RestRestaurantsController {
 //        if (!productsService.existsById(id)) {
 //            throw new ProductNotFoundException("Product not found, id: " + id);
 //        }
-        return new ResponseEntity<>(productsService.findAllProducts(), HttpStatus.OK);
+        return new ResponseEntity<>(productsService.findAllProductsByRestaurant(id), HttpStatus.OK);
     }
 
     @DeleteMapping

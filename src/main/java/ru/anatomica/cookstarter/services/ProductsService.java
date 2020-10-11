@@ -60,8 +60,8 @@ public class ProductsService {
         return restaurantsRepository.findAll();
     }
 
-    public List<ProductMenu> findAllProducts() {
-        return productsMenuRepository.findAll();
+    public List<ProductMenu> findAllProductsByRestaurant(Long id) {
+        return productsMenuRepository.findAllByRestaurantId(id);
     }
 
     public void deleteAll() {

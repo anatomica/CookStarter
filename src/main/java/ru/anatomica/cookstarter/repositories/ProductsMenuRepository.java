@@ -8,8 +8,9 @@ import ru.anatomica.cookstarter.entities.ProductMenu;
 import ru.anatomica.cookstarter.entities.dtos.ProductDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductsMenuRepository extends JpaRepository<ProductMenu, Long>, JpaSpecificationExecutor<ProductMenu> {
-
+    List<ProductMenu> findAllByRestaurantId(Long id);
 }
