@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Proxy(lazy = false)
-@Table(name = "productsMenu")
+@Table(name = "products_menu")
 @Data
 @Getter
 @NoArgsConstructor

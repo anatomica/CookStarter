@@ -9,9 +9,9 @@ INSERT INTO Restaurants
 ('Roppolo''s', 'Roppolo''s - сеть ресторанов', 'Москва, ул. Ленина д.1', '+7 495 123-45-67'),
 ('TacoBell', 'TacoBell - сеть ресторанов', 'Москва, ул. Ленина д.1', '+7 495 123-45-67');
 
-DROP TABLE IF EXISTS ProductsMenu CASCADE;
-create table ProductsMenu (id bigserial, title varchar(255), description varchar(5000), category int, price int, restaurant_id int, logo_id int, primary key (id));
-insert into ProductsMenu
+DROP TABLE IF EXISTS Products_menu CASCADE;
+create table Products_menu (id bigserial, title varchar(255), description varchar(5000), category int, price int, restaurant_id int, logo_id int, primary key (id));
+insert into Products_menu
 (title, description, category, price, restaurant_id, logo_id) values
 ('Светлое пиво', 'Свежее светлое пиво', 1, 320, 1, 1),
 ('Темное пиво', 'Свежее темное пиво', 2, 350, 1, 1),
@@ -33,7 +33,7 @@ insert into ProductsMenu
 ('Картофель Фри', 'Жаренный картофель', 3, 100, 6, 6);
 
 DROP TABLE IF EXISTS Menu CASCADE;
-CREATE TABLE Menu (id bigserial PRIMARY KEY, id_category INT, name VARCHAR(255), foreign key (id_category) references ProductsMenu (id));
+CREATE TABLE Menu (id bigserial PRIMARY KEY, id_category INT, name VARCHAR(255), foreign key (id_category) references Products_menu (id));
 INSERT INTO Menu
 (id_category, name) values
 (1, 'Горячие блюда'),
