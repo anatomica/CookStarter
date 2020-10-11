@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Proxy(lazy = false)
-@Table(name = "products")
+@Table(name = "productsMenu")
 @Data
 @Getter
 @NoArgsConstructor
@@ -33,6 +33,9 @@ public class ProductMenu {
     @Column(name = "restaurant_id")
     private Long restaurantId;
 
+    @Column(name = "logo_id")
+    private Long logoId;
+
 //    @ManyToOne
 //    @JoinColumn(name = "category" )
 //    private Category category;
@@ -45,11 +48,12 @@ public class ProductMenu {
 //    )
 //    private List<Category> categories;
 
-    public ProductMenu(String title, String description, BigDecimal price, Long restaurantId) {
+    public ProductMenu(String title, String description, BigDecimal price, Long restaurantId, Long logoId) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.restaurantId = restaurantId;
+        this.logoId = logoId;
     }
 
 //    public ProductMenu(String title, String description, BigDecimal price, Category category) {
