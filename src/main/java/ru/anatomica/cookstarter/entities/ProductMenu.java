@@ -34,7 +34,7 @@ public class ProductMenu {
     private Long restaurantId;
 
     @Column(name = "logo_id")
-    private Long logoId;
+    private int logoId;
 
 //    @ManyToOne
 //    @JoinColumn(name = "category" )
@@ -48,7 +48,7 @@ public class ProductMenu {
 //    )
 //    private List<Category> categories;
 
-    public ProductMenu(String title, String description, BigDecimal price, Long restaurantId, Long logoId) {
+    public ProductMenu(String title, String description, BigDecimal price, Long restaurantId, int logoId) {
         this.title = title;
         this.description = description;
         this.price = price;
