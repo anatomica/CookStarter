@@ -33,7 +33,7 @@ insert into Products
 ('Картофель Фри', 'Жаренный картофель', 3, 100, 6, 6);
 
 DROP TABLE IF EXISTS Menu CASCADE;
-CREATE TABLE Menu (id bigserial PRIMARY KEY, id_category INT, name VARCHAR(255), foreign key (id_category) references Products_menu (id));
+CREATE TABLE Menu (id bigserial PRIMARY KEY, id_category INT, name VARCHAR(255), foreign key (id_category) references Products (id));
 INSERT INTO Menu
 (id_category, name) values
 (1, 'Горячие блюда'),
