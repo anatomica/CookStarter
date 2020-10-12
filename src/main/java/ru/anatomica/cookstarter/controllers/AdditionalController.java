@@ -26,7 +26,7 @@ public class AdditionalController {
         return "all_products";
     }
 
-    @GetMapping("/add_or_edit_product")
+    @GetMapping("/products/add_or_edit_product")
     public String addOrEditProductPage() {
         return "add_or_edit_product";
     }
