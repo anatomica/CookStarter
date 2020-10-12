@@ -2,6 +2,7 @@ package ru.anatomica.cookstarter.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
 import ru.anatomica.cookstarter.entities.Product;
 import ru.anatomica.cookstarter.entities.dtos.ProductDto;
 import ru.anatomica.cookstarter.exceptions.ProductNotFoundException;
@@ -11,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.anatomica.cookstarter.utils.ProductFilter;
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
@@ -31,11 +35,14 @@ public class RestProductsController {
         return productsService.getDtoData();
     }
 
-//    @GetMapping(produces = "application/json")
-//    public List<Product> getAllProducts(@RequestParam(required = false) Map<String, String> requestParams){
-//        Integer pageNumber = Integer.parseInt(requestParams.getOrDefault("p", "1"));
-//        return productsService.findAllProducts();
-//    }
+    @GetMapping(produces = "application/json")
+    @ApiOperation("Returns list or page of all products")
+    public List<Product> getPageProducts(@RequestParam(required = false) Map<String, String> requestParams){
+        Integer pageNumber = Integer.parseInt(requestParams.getOrDefault("p", "1"));
+        ProductFilter productFilter = new ProductFilter(requestParams);
+        Page<Product> products = productsService.findAll(productFilter.getSpec(), pageNumber);
+        return products.getContent();
+    }
 
     @GetMapping(value = "/{id}", produces = "application/json")
     @ApiOperation("Returns list products by restaurant id")

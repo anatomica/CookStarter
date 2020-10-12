@@ -1,6 +1,9 @@
 package ru.anatomica.cookstarter.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.anatomica.cookstarter.entities.Product;
 import ru.anatomica.cookstarter.entities.dtos.ProductDto;
@@ -19,6 +22,13 @@ public class ProductsService {
 
     public List<Product> findAllProducts(Long id) {
         return productsRepository.findAll();
+    }
+
+    public Page<Product> findAll(Specification<Product> spec, Integer page) {
+        if (page < 1L) {
+            page = 1;
+        }
+        return productsRepository.findAll(spec, PageRequest.of(page - 1, 10));
     }
 
     public List<Product> findAllProductsByRestaurant(Long id) {
