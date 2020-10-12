@@ -12,13 +12,18 @@ public class AdditionalController {
     }
 
     @GetMapping("/login")
-    public String loginPageJS() {
+    public String loginPage() {
         return "login";
     }
 
     @GetMapping("/logouts")
     public String logoutPage() {
         return "logout";
+    }
+
+    @GetMapping("/products")
+    public String productsPage() {
+        return "all_products";
     }
 
     @GetMapping("/cart")
