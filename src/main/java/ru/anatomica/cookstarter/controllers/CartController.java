@@ -5,13 +5,12 @@ import ru.anatomica.cookstarter.entities.dtos.OrderItemDto;
 import ru.anatomica.cookstarter.exceptions.ResourceNotFoundException;
 import ru.anatomica.cookstarter.services.CartService;
 import ru.anatomica.cookstarter.services.OrderItemService;
-import ru.anatomica.cookstarter.services.ProductsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import ru.anatomica.cookstarter.services.ProductsService;
 import java.util.List;
 
 @RestController

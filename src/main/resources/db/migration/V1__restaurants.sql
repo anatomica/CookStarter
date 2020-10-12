@@ -9,9 +9,9 @@ INSERT INTO Restaurants
 ('Roppolo''s', 'Roppolo''s - сеть ресторанов', 'Москва, ул. Ленина д.1', '+7 495 123-45-67'),
 ('TacoBell', 'TacoBell - сеть ресторанов', 'Москва, ул. Ленина д.1', '+7 495 123-45-67');
 
-DROP TABLE IF EXISTS Products_menu CASCADE;
-create table Products_menu (id bigserial, title varchar(255), description varchar(5000), category int, price int, restaurant_id int, logo_id int, primary key (id));
-insert into Products_menu
+DROP TABLE IF EXISTS Products CASCADE;
+create table Products (id bigserial, title varchar(255), description varchar(5000), category int, price int, restaurant_id int, logo_id int, primary key (id));
+insert into Products
 (title, description, category, price, restaurant_id, logo_id) values
 ('Светлое пиво', 'Свежее светлое пиво', 1, 320, 1, 1),
 ('Темное пиво', 'Свежее темное пиво', 2, 350, 1, 1),
@@ -39,3 +39,16 @@ INSERT INTO Menu
 (1, 'Горячие блюда'),
 (2, 'Холодные закуски'),
 (3, 'Десерт');
+
+-- drop table if exists categories cascade;
+-- create table categories (id bigserial, name varchar(255), primary key(id));
+-- insert into categories
+-- (name) values
+-- ('Категория 1'),
+-- ('Категория 2'),
+-- ('Категория 3');
+--
+-- drop table if exists products_categories cascade;
+-- create table products_categories (product_id bigint not null, category_id bigint not null, primary key(product_id, category_id),
+-- foreign key (product_id) references products(id), foreign key (category_id) references categories(id));
+-- insert into products_categories (product_id, category_id) values (1, 1), (2, 1), (3, 2), (4, 3);

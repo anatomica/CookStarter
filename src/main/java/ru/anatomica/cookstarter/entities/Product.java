@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -31,9 +30,15 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name = "category" )
-    private Category category;
+    @Column(name = "restaurant_id")
+    private Long restaurantId;
+
+    @Column(name = "logo_id")
+    private int logoId;
+
+//    @ManyToOne
+//    @JoinColumn(name = "category" )
+//    private Category category;
 
 //    @ManyToMany
 //    @JoinTable(
@@ -43,18 +48,20 @@ public class Product {
 //    )
 //    private List<Category> categories;
 
-    public Product(String title, String description, BigDecimal price) {
+    public Product(String title, String description, BigDecimal price, Long restaurantId, int logoId) {
         this.title = title;
         this.description = description;
         this.price = price;
+        this.restaurantId = restaurantId;
+        this.logoId = logoId;
     }
 
-    public Product(String title, String description, BigDecimal price, Category category) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.category = category;
-    }
+//    public ProductMenu(String title, String description, BigDecimal price, Category category) {
+//        this.title = title;
+//        this.description = description;
+//        this.price = price;
+//        this.category = category;
+//    }
 
     @Override
     public boolean equals(Object o) {

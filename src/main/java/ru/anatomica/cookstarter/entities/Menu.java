@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "menu")
 @Data
 @Getter
 @NoArgsConstructor
-public class Category {
+public class Menu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Category {
 //    @JsonBackReference
 //    private List<Product> products;
 
-    public Category(String id_category, String name) {
+    public Menu(String id_category, String name) {
         this.id_category = id_category;
         this.name = name;
     }

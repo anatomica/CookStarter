@@ -1,6 +1,5 @@
 package ru.anatomica.cookstarter.utils;
 
-import ru.anatomica.cookstarter.entities.Product;
 import ru.anatomica.cookstarter.repositories.specifications.ProductSpecifications;
 import lombok.Getter;
 import org.springframework.data.jpa.domain.Specification;

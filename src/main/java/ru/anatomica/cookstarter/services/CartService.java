@@ -1,12 +1,12 @@
 package ru.anatomica.cookstarter.services;
 
 import ru.anatomica.cookstarter.entities.OrderItem;
-import ru.anatomica.cookstarter.entities.Product;
 import lombok.Data;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
+import ru.anatomica.cookstarter.entities.Product;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;

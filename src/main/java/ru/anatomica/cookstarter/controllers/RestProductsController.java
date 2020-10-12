@@ -1,25 +1,22 @@
 package ru.anatomica.cookstarter.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ru.anatomica.cookstarter.entities.Product;
 import ru.anatomica.cookstarter.entities.dtos.ProductDto;
 import ru.anatomica.cookstarter.exceptions.ProductNotFoundException;
 import ru.anatomica.cookstarter.services.ProductsService;
-import ru.anatomica.cookstarter.utils.ProductFilter;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/products")
+@Api("Set of endpoints for CRUD operations for Products")
 public class RestProductsController {
     private ProductsService productsService;
 
@@ -29,38 +26,29 @@ public class RestProductsController {
     }
 
     @GetMapping("/dto")
+    @ApiOperation("Returns list of all restaurants data transfer objects")
     public List<ProductDto> getAllProductsDto() {
         return productsService.getDtoData();
     }
 
-    @GetMapping(produces = "application/json")
-    public List<Product> getPageProducts(@RequestParam(required = false) Map<String, String> requestParams){
-        Integer pageNumber = Integer.parseInt(requestParams.getOrDefault("p", "1"));
-        ProductFilter productFilter = new ProductFilter(requestParams);
-        Page<Product> products = productsService.findAll(productFilter.getSpec(), pageNumber);
-        return products.getContent();
-    }
+//    @GetMapping(produces = "application/json")
+//    public List<Product> getAllProducts(@RequestParam(required = false) Map<String, String> requestParams){
+//        Integer pageNumber = Integer.parseInt(requestParams.getOrDefault("p", "1"));
+//        return productsService.findAllProducts();
+//    }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<?> getOneProduct(@PathVariable @ApiParam("Id of the product to be requested. Cannot be empty") Long id) {
+    @ApiOperation("Returns list products by restaurant id")
+    public ResponseEntity<?> getAllProductsByRestaurant(@PathVariable @ApiParam("Id of the restaurant to be requested. Cannot be empty") Long id) {
         if (!productsService.existsById(id)) {
-            throw new ProductNotFoundException("Product not found, id: " + id);
+            throw new ProductNotFoundException("Restaurant not found, id: " + id);
         }
-        return new ResponseEntity<>(productsService.findById(id), HttpStatus.OK);
-    }
-
-    @DeleteMapping
-    public void deleteAllProducts() {
-        productsService.deleteAll();
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteOneProducts(@PathVariable Long id) {
-        productsService.deleteById(id);
+        return new ResponseEntity<>(productsService.findAllProductsByRestaurant(id), HttpStatus.OK);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Creates a new Product")
     public Product saveNewProduct(@RequestBody Product product) {
         if (product.getId() != null) {
             product.setId(null);
@@ -69,6 +57,7 @@ public class RestProductsController {
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
+    @ApiOperation("Modifies an existing Product")
     public ResponseEntity<?> modifyProduct(@RequestBody Product product) {
         if (product.getId() == null || !productsService.existsById(product.getId())) {
             throw new ProductNotFoundException("Product not found, id: " + product.getId());
@@ -77,6 +66,12 @@ public class RestProductsController {
             return new ResponseEntity<>("Product's price can not be negative", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(productsService.saveOrUpdate(product), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation("Removes one Product by id")
+    public void deleteOneProducts(@PathVariable Long id) {
+        productsService.deleteById(id);
     }
 
 }
