@@ -28,8 +28,8 @@ insert into roles (name)
 values ('ROLE_CUSTOMER'), ('ROLE_MANAGER'), ('ROLE_ADMIN');
 
 insert into users (phone, password, first_name, last_name, email, user_block) values
-('+7 910 123-45-67','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i','admin','admin','admin@gmail.com', false),
-('100','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i','admin','admin','100', false);
+('+7 910 123-45-67','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i','Максим','Фомин','admin@gmail.com', false),
+('100','$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i','User','Test','100', false);
 
 insert into users_roles (user_id, role_id)
 values (1, 1), (1, 2), (1, 3);
