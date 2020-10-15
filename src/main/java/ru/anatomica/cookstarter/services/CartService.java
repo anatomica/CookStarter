@@ -1,20 +1,18 @@
 package ru.anatomica.cookstarter.services;
 
+import org.springframework.web.context.annotation.ApplicationScope;
 import ru.anatomica.cookstarter.entities.OrderItem;
 import lombok.Data;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
 import ru.anatomica.cookstarter.entities.Product;
-
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+// @Scope(value = WebApplicationContext..SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+@ApplicationScope
 @Data
 public class CartService {
     private List<OrderItem> items;
@@ -23,6 +21,10 @@ public class CartService {
     @PostConstruct
     public void init() {
         items = new ArrayList<>();
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
     }
 
     public void clear() {

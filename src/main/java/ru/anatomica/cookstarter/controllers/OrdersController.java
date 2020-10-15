@@ -23,14 +23,17 @@ import java.util.List;
 @RequestMapping("/api/v1/orders")
 @AllArgsConstructor
 public class OrdersController {
+
     private UsersService usersService;
     private OrdersService ordersService;
     private CartService cartService;
     private List<Object> myOrder;
 
     @GetMapping()
-    public ResponseEntity<?> getOrder() {
-        cartService.clear();
+    public ResponseEntity<?> getOrder(Principal principal) {
+        User user = usersService.findByEmail(principal.getName()).get();
+        Order order = new Order(user, cartService, "1", "1");
+        myOrder = Collections.singletonList(order);
         return new ResponseEntity<>(myOrder, HttpStatus.OK);
     }
 
@@ -42,11 +45,11 @@ public class OrdersController {
     }
 
     @PostMapping(value = "/confirm", produces = "application/json")
-    public ResponseEntity<?> confirmOrder(Principal principal, @RequestParam String address, String phone) {
+    public ResponseEntity<?> confirmOrder(Principal principal, @RequestParam(required = false) String address, String phone) {
         User user = usersService.findByEmail(principal.getName()).get();
         Order order = new Order(user, cartService, phone, address);
         myOrder.clear();
-        myOrder = Collections.singletonList(order);
+        cartService.clear();
         return new ResponseEntity<>(ordersService.saveOrder(order), HttpStatus.CREATED);
     }
 
