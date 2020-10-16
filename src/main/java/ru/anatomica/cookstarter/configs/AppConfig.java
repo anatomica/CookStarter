@@ -37,7 +37,7 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowCredentials(true)
                 .allowedOrigins("*")
-                .allowedMethods("*")
-                .allowedHeaders("*");
+                .allowedMethods("GET, POST, PUT, DELETE, OPTIONS")
+                .allowedHeaders("Content-Type, Authorization");
     }
 }
