@@ -40,7 +40,7 @@ public class AppConfig implements WebMvcConfigurer {
                 registry.addMapping("/**")
                         .allowedHeaders("Content-Type, Authorization")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedOrigins("*");
+                        .allowedOrigins("http://localhost:8189");
             }
         };
     }
