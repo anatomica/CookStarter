@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:8189")
 @RequestMapping("/api/v1/products")
 @Api("Set of endpoints for CRUD operations for Products")
 public class RestProductsController {
