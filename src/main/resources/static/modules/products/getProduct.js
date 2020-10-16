@@ -23,7 +23,6 @@ angular.module('Products', [])
                         "Access-Control-Allow-Origin": "*",
                         'Accept': 'application/json'
                     },
-                    dataType: 'jsonp'
                 }).then(function(response) {
                         $scope.AllProducts = response.data;
                     });

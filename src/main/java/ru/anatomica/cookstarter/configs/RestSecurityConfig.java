@@ -1,5 +1,6 @@
 package ru.anatomica.cookstarter.configs;
 
+import org.springframework.http.HttpMethod;
 import ru.anatomica.cookstarter.beans.JwtRequestFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,7 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN")
                 .antMatchers("/profile/**").authenticated()
                 .antMatchers("/orders/**").authenticated()

@@ -2,6 +2,9 @@ package ru.anatomica.cookstarter.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -30,14 +33,20 @@ public class AppConfig implements WebMvcConfigurer {
         return localeChangeInterceptor;
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "OPTIONS", "PUT", "DELETE")
-                .allowedHeaders("Content-Type", "X-Requested-With", "Access-Control-Allow-Origin", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers")
-                .allowCredentials(true)
-                .maxAge(3600);
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 
 }
