@@ -15,8 +15,16 @@ angular.module('Products', [])
         else {
             fillTable = function() {
                 // window.btoa("admin@gmail.com:100")
-                $http.get(advertsPath)
-                    .then(function(response) {
+                $http({
+                    method: 'GET',
+                    url: advertsPath,
+                    defaultHeaders: {
+                        'Content-Type': 'application/json',
+                        "Access-Control-Allow-Origin": "*",
+                        'Accept': 'application/json'
+                    },
+                    dataType: 'jsonp'
+                }).then(function(response) {
                         $scope.AllProducts = response.data;
                     });
             };
