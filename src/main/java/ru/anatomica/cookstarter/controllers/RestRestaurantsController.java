@@ -27,9 +27,9 @@ public class RestRestaurantsController {
 
     @GetMapping(produces = "application/json")
     @ApiOperation("Returns list of all Restaurants")
-    public List<Restaurant> getListRestaurants(@RequestParam(required = false) Map<String, String> requestParams){
+    public ResponseEntity<?> getListRestaurants(@RequestParam(required = false) Map<String, String> requestParams){
         Integer pageNumber = Integer.parseInt(requestParams.getOrDefault("p", "1"));
-        return restaurantsService.findAllRestaurants();
+        return new ResponseEntity<>(restaurantsService.findAllRestaurants(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/restaurant/{id}", produces = "application/json")
